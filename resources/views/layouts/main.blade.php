@@ -22,28 +22,34 @@
         }
     </style>
 
+    {{-- Font --}}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Vollkorn&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ URL::asset('css/style.css') }}">
 </head>
 <body>
     {{-- Navbar --}}
-    <header class="p-3 bg-primary text-white">
+    <header class="p-3 text-dark cBase-color">
         <div class="container">
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
                 <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
                     {{-- <img src="https://img.icons8.com/external-bearicons-flat-bearicons/50/000000/external-Goat-chinese-new-year-bearicons-flat-bearicons.png"/> --}}
-                    <img src="{{ URL::asset('images/logo/logo sementara.png') }}" alt="" height="50">
+                    <img src="{{ URL::asset('images/logo/logo.jpg') }}" alt="" height="100">
                 </a>
     
-                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                    <li><a href="/" class="nav-link px-2 text-white">Home</a></li>
-                    <li><a href="/search" class="nav-link px-2 text-white">Search Product</a></li>
+                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0 add-margin-left">
+                    <li><a href="/" class="nav-link px-2 text-dark add-font-size">Home</a></li>
+                    <li><a href="/products" class="nav-link px-2 text-dark add-font-size">Products</a></li>
+                    <li><a href="/search" class="nav-link px-2 text-dark add-font-size">Search Product</a></li>
                 </ul>
         
 
                 @auth
                 <ul class="navbar-nav">
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             {{ auth()->user()->name }}
                         </a>
                         <ul class="dropdown-menu btn-outline-light" aria-labelledby="navbarDropdown">
@@ -71,11 +77,11 @@
 
                 @else
                 <div class="text-end">
-                    <a href="/login"><button type="button" class="btn btn-outline-light me-2">Login</button></a>
+                    <a href="/login"><button type="button" class="btn btn-outline-dark me-2">Login</button></a>
                     <a href="/register"><button type="button" class="btn btn-warning">Sign-up</button></a>
                 </div>
                 @endauth
-                    
+
             </div>
         </div>
     </header>
@@ -93,7 +99,7 @@
                 <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Facebook</a></li>
                 <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Youtube</a></li>
             </ul>
-            <p class="text-center text-muted">&copy; 2021 MbWekCenter, Inc</p>
+            <p class="text-center text-muted">&copy; 2022 Le Blanc, Inc</p>
         </footer>
     </div>
     

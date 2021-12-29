@@ -17,7 +17,7 @@ class HomeController extends Controller
 
         return view('home.home', [
             'title' => 'Le Blanc | Hello',
-            'product' => Product::paginate(6)
+            'product' => Product::paginate(3)
         ]);
     }
 

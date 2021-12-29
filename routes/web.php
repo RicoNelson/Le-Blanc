@@ -36,6 +36,8 @@ Route::post('/register', [RegisterController::class, 'store']);
 
 Route::get('/search', [SearchController::class, 'index']);
 
+Route::get('/products', [ProductController::class, 'index']);
+
 // ADMIN
 // update product
 Route::get('/update/{id}', [UpdateController::class, 'show'])->middleware('admin');

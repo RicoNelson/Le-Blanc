@@ -27,8 +27,8 @@ class LoginController extends Controller
         ]);
 
         if($request->remember){
-            Cookie::queue('email_cookie', $request->email, 120);
-            Cookie::queue('password_cookie', $request->password, 120);
+            Cookie::queue('email_cookie', $request->email, 3);
+            Cookie::queue('password_cookie', $request->password, 3);
         }
 
         if(Auth::attempt($credentials)){

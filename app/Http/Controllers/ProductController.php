@@ -15,7 +15,10 @@ class ProductController extends Controller
      */
     public function index()
     {
-        
+        return view('product.product-page', [
+            'title' => 'Le Blanc | Products',
+            'product' => Product::all()->take(3)
+        ]);
     }
 
     /**

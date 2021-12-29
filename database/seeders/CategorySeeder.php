@@ -15,11 +15,10 @@ class CategorySeeder extends Seeder
     public function run()
     {
         DB::table('category')->insert([
-            ['category_name' => 'Animal'],
-            ['category_name' => 'Computer'],
-            ['category_name' => 'Bottle'],
-            ['category_name' => 'Kitchen Attribute'],
-            ['category_name' => 'Television'],
+            ['category_name' => 'Mirror'],
+            ['category_name' => 'Painting'],
+            ['category_name' => 'Sewing Machine'],
+            ['category_name' => 'Vase'],
         ]);
     }
 }
