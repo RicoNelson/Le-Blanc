@@ -61,9 +61,9 @@
     </div>
 
     <div class="form-group row mb-3">
-        <label for="price" class="col-sm-2 col-form-label">Price: </label>
+        <label for="price" class="col-sm-2 col-form-label">Starting Price: </label>
         <div class="col-sm-10">
-            <input type="number" class="form-control" id="price" @error('price') is-invalid @enderror value="{{ $product->price }}" name="price">
+            <input type="number" class="form-control" id="price" @error('price') is-invalid @enderror value="{{ $product->starting_price }}" name="price">
         </div>
 
         @error('price')
@@ -74,12 +74,12 @@
     </div>
 
     <div class="form-group row mb-3">
-        <label for="stock" class="col-sm-2 col-form-label">Stock: </label>
+        <label for="datetimeInput" class="col-sm-2 col-form-label">Starting Price: </label>
         <div class="col-sm-10">
-            <input type="number" class="form-control" id="stock" @error('stock') is-invalid @enderror value="{{ $product->stock }}" name="stock">
+            <input type="datetime-local" class="form-control" id="datetimeInput" @error('datetimeInput') is-invalid @enderror value="{{ $datetime }}" name="datetimeInput">
         </div>
 
-        @error('stock')
+        @error('datetimeInput')
             <div class="invalid-feedback d-block text-start">
                 {{ $message }}
             </div>
@@ -104,7 +104,7 @@
 
     <div class="form-group row">
         <div class="col-sm-10">
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-outline-dark">Submit</button>
         </div>
     </div>
 

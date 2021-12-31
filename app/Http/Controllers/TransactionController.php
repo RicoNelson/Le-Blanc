@@ -53,11 +53,9 @@ class TransactionController extends Controller
             $detail_transaction->item_name = $cart_item->products->product_name;
             $detail_transaction->item_detail = $cart_item->products->product_description;
             $detail_transaction->price = $cart_item->products->price;
-            $detail_transaction->quantity = $cart_item->quantity;
             $detail_transaction->save();
 
             $product = Product::where('product_id', $cart_item->products->product_id);
-            $product->decrement('stock', $cart_item->quantity);
         }
 
         Cart::where('user_id', $request->id)->delete();

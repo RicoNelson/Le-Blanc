@@ -13,7 +13,7 @@
                     <th scope="col">Item Name</th>
                     <th scope="col">Item Detail</th>
                     <th scope="col">Price</th>
-                    <th scope="col">Quantity</th>
+                    {{-- <th scope="col">Quantity</th> --}}
                     <th scope="col">Sub Total</th>
                 </tr>
             </thead>
@@ -28,10 +28,10 @@
                             <td>{{ $detail_transaction_item->item_name }}</td>
                             <td>{{ $detail_transaction_item->item_detail }}</td>
                             <td>Rp. {{ $detail_transaction_item->price }},-</td>
-                            <td>{{ $detail_transaction_item->quantity }}</td>
-                            <td>Rp. {{ $detail_transaction_item->quantity * $detail_transaction_item->price }},-</td>
+                            {{-- <td>{{ $detail_transaction_item->quantity }}</td>
+                            <td>Rp. {{ $detail_transaction_item->quantity * $detail_transaction_item->price }},-</td> --}}
                             @php
-                                $grand_total += ($detail_transaction_item->quantity * $detail_transaction_item->price);
+                                $grand_total += ($detail_transaction_item->price);
                             @endphp
                         </tr>
                     @endforeach

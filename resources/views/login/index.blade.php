@@ -47,7 +47,7 @@
                 <input type="checkbox" name="remember" id="remember" checked="{{ Cookie::get('email_cookie') !== null }}"> Remember me
                 </label>
             </div>
-            <button class="w-100 btn btn-lg btn-primary mb-4" type="submit">Log in</button>
+            <button class="w-100 btn btn-outline-dark" type="submit">Log in</button>
 
             <p>Not Registered? <a href="/register">Register Now!</a></p>
         </form>

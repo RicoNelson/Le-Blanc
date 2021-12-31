@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ActiveBidController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\DetailTransactionController;
 use App\Http\Controllers\HomeController;
@@ -47,14 +48,18 @@ Route::get('/insert', [ProductController::class, 'insertProductIndex'])->middlew
 Route::post('/insert', [ProductController::class, 'store'])->middleware('admin');
 
 Route::get('/detail-product/{id}', [ProductController::class, 'show']);
-Route::post('/detail-product/{id}', [CartController::class, 'store'])->middleware('auth');
 
 Route::get('/manage-user', [ManageUserController::class, 'index'])->middleware('admin');
 Route::post('/manage-user/{id}', [ManageUserController::class, 'destroy'])->middleware('admin');
 
 // CUSTOMER
+
+Route::get('/active-bid', [ActiveBidController::class, 'index'])->middleware('customer');
+
 Route::get('/cart', [CartController::class, 'show'])->middleware('customer');
 Route::post('/cart', [CartController::class, 'destroy'])->middleware('customer');
+
+Route::post('/detail-product/{id}', [ActiveBidController::class, 'store'])->middleware('customer');
 
 Route::get('/transaction', [TransactionController::class, 'show'])->middleware('customer');
 Route::post('/transaction-create', [TransactionController::class, 'store'])->middleware('customer');

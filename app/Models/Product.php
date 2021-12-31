@@ -23,9 +23,14 @@ class Product extends Model
         return $this->hasMany(Cart::class, 'product_id', 'product_id');
     }
 
-    public function updateStock($id, $qty){
-        $this->product[$id]['quantity'] -= $qty;
+    public function user(){
+        return $this->belongsTo(User::class, 'highest_bidder_id', 'user_id');
     }
+
+    public function active_bid(){
+        return $this->hasOne(ActiveBid::class, 'product_id', 'product_id');
+    }
+
 
     public function scopeFilter($query, array $filters){
         $query->when($filters['product_name'] ?? false, function($query, $product_name) {

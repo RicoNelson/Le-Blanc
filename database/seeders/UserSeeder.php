@@ -28,7 +28,13 @@ class UserSeeder extends Seeder
             'name' => 'customer',
             'email' => 'customer@customer.com',
             'gender' => 'male',
-            'password' => bcrypt('password')]
+            'password' => bcrypt('password')],
+
+            ['role_id' => 2,
+            'name' => 'customer',
+            'email' => 'customer2@customer.com',
+            'gender' => 'male',
+            'password' => bcrypt('password')],
         ]);
     }
 }

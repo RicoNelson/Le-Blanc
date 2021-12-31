@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class UpdateController extends Controller
@@ -69,10 +70,10 @@ class UpdateController extends Controller
     {
         $validated_data = $request->validate([
             'category' => 'required',
-            'title' => 'required|min:5|max:25',
+            'title' => 'required|min:5|max:50',
             'description' => 'required|min:10|max:100',
-            'price' => 'required|numeric|between:1000,10000000',
-            'stock' => 'required|min:1|numeric'
+            'price' => 'required|numeric|between:1,10000000',
+            'datetimeInput' => 'required|date|after:tomorrow'
         ]);
 
         if($request->hasFile('image')){
@@ -86,8 +87,8 @@ class UpdateController extends Controller
         $product['category_id'] = $request['category'];
         $product['product_name'] = $request['title'];
         $product['product_description'] = $request['description'];
-        $product['price'] = $request['price'];
-        $product['stock'] = $request['stock'];
+        $product['starting_price'] = $request['price'];
+        $product['end_date'] = Carbon::parse($request->datetimeInput)->format('Y-m-d H:i:s');
         
         if($request->file('image')){
             $product['product_image'] = 'storage/' . $request->file('image')->store('images/product');
@@ -109,10 +110,13 @@ class UpdateController extends Controller
     {
         $product = Product::where('product_id', $id)->first();
 
+        $parse_dateime = Carbon::parse($product->end_date)->format('Y-m-d\TH:i');
+
         return view('product.update', [
             'title' => 'Le Blanc | Update',
             'category' => Category::all(),
-            'product' => $product
+            'product' => $product,
+            'datetime' => $parse_dateime
         ]);
     }
 

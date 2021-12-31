@@ -9,7 +9,7 @@
             <h1 class="h3 mb-3 fw-normal">Registration Form</h1>
         
             <div class="form-floating input-placeholder">
-                <input type="text" name="name" class="form-control rounded-top @error('name') is-invalid @enderror" id="name" value="{{ old('name') }}" placeholder="Your Name" required>
+                <input type="text" name="name" class="form-control rounded-top @error('name') is-invalid @enderror" id="name" value="{{ old('name') }}" placeholder="Your Name" autofocus required>
                 <label for="name">Name</label>
 
                 @error('name')
@@ -60,7 +60,7 @@
             @enderror
             </div>
 
-            <button class="w-100 btn btn-lg btn-primary mb-4 mt-3" type="submit">Register</button>
+            <button class="w-100 btn btn-lg btn-warning mb-4 mt-3" type="submit">Register</button>
 
             <p>Already have an account? <a href="/login">Login Now!</a></p>
         </form>

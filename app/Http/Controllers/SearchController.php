@@ -20,7 +20,7 @@ class SearchController extends Controller
         return view('search.index', [
             'title' => 'Le Blanc | Search',
             'category' => $category,
-            'product' => Product::latest()->filter(request(['product_name', 'category']))->paginate(6)
+            'product' => Product::latest()->filter(request(['product_name', 'category']))->paginate(8)
         ]);
     }
 

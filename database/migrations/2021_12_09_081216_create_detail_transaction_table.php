@@ -19,7 +19,6 @@ class CreateDetailTransactionTable extends Migration
             $table->string('item_name');
             $table->string('item_detail');
             $table->integer('price');
-            $table->integer('quantity');
             $table->timestamps();
 
             $table->foreign('transaction_id')->references('transaction_id')->on('transaction')->onDelete('cascade')->onUpdate('cascade');

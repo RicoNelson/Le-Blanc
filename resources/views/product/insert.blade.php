@@ -62,29 +62,29 @@
     </div>
 
     <div class="form-group row mb-3">
-        <label for="price" class="col-sm-2 col-form-label">Price: </label>
+        <label for="price" class="col-sm-2 col-form-label">Starting Price: </label>
         <div class="col-sm-10">
-            <input type="number" class="form-control @error('price') is-invalid @enderror" id="price" name="price">
-            @error('price')
-                <div class="invalid-feedback d-block text-start">
-                    {{ $message }}
-                </div>
-            @enderror
+            <input type="number" class="form-control" id="price" @error('price') is-invalid @enderror name="price">
         </div>
 
+        @error('price')
+            <div class="invalid-feedback d-block text-start">
+                {{ $message }}
+            </div>
+        @enderror
     </div>
 
     <div class="form-group row mb-3">
-        <label for="stock" class="col-sm-2 col-form-label">Stock: </label>
+        <label for="datetimeInput" class="col-sm-2 col-form-label">Starting Price: </label>
         <div class="col-sm-10">
-            <input type="number" class="form-control @error('stock') is-invalid @enderror" id="stock" name="stock">
-            @error('stock')
-                <div class="invalid-feedback d-block text-start">
-                    {{ $message }}
-                </div>
-            @enderror
+            <input type="datetime-local" class="form-control" id="datetimeInput" @error('datetimeInput') is-invalid @enderror name="datetimeInput">
         </div>
 
+        @error('datetimeInput')
+            <div class="invalid-feedback d-block text-start">
+                {{ $message }}
+            </div>
+        @enderror
     </div>
 
     <div class="form-group row mb-3">

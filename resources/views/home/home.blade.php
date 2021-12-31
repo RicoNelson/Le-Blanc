@@ -15,7 +15,7 @@
             <img src="https://img.icons8.com/external-those-icons-lineal-those-icons/24/000000/external-dollar-money-currency-those-icons-lineal-those-icons-5.png"/>
             <h6 class="add-margin-left font-size-17">Start from USD 9.000</h6>
         </div>
-        <button class="height-button"><a href="#" style="width: 50px; text-decoration:none; color:black">Bid</button></a>
+        <button class="height-button"><a href="/detail-product/12" style="width: 50px; text-decoration:none; color:black">Bid</button></a>
     </div>
 
     <div class="image">
@@ -24,7 +24,6 @@
 
     
 </div>
-
 
 <div class="p-5 mb-4 border border-4 mt-5">
     <div class="container-fluid py-5 text-end">
@@ -40,8 +39,11 @@
 <section class="py-5">
     <div class="container px-4 px-lg-5 mt-2">
         <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+            @php
+                $countdown = 0;
+            @endphp
             @foreach ($product as $prod)
-            <div class="col mb-5">
+            <a href="/detail-product/{{ $prod->product_id }}" class="col mb-5 no-text-decor">
                 <div class="card h-100">
                     <!-- Product image-->
                     <img class="card-img-top .img-thumbnail" src="{{ URL::asset($prod->product_image) }}" style="object-fit: cover; height:300px; width:100%;" alt="..."/>
@@ -59,9 +61,53 @@
 
                     <!-- Product price-->
                     <div class="p-4 lower-card">
-                        HIGHEST BID:
-                        <p>USD {{ $prod->starting_price }}</p>
+                        @if ($prod->highest_bid === $prod->starting_price)
+                            STARTING PRICE:
+                            <p>USD {{ $prod->starting_price }}</p>
+                        @else
+                            HIGHEST BID:
+                            <p>USD {{ $prod->highest_bid }}</p>
+                        @endif
+
+                        <script>
+                            CountDownTimer('{{ $prod->end_date }}','countdown-{{$countdown}}');
+                            function CountDownTimer(dt, id){
+                                var end = new Date(dt);
+                                var _second = 1000;
+                                var _minute = _second * 60;
+                                var _hour = _minute * 60;
+                                var _day = _hour * 24;
+                                var timer;
+                                function showRemaining() {
+                                    var now = new Date();
+                                    var distance = end - now;
+                                    if (distance < 0) {
+                        
+                                        clearInterval(timer);
+                                        return;
+                                    }
+                                    var days = Math.floor(distance / _day);
+                                    var hours = Math.floor((distance % _day) / _hour);
+                                    var minutes = Math.floor((distance % _hour) / _minute);
+                                    var seconds = Math.floor((distance % _minute) / _second);
+                        
+                                    document.getElementById(id).innerHTML = days + 'days ';
+                                    document.getElementById(id).innerHTML += hours + 'hrs ';
+                                    document.getElementById(id).innerHTML += minutes + 'mins ';
+                                    document.getElementById(id).innerHTML += seconds + 'secs';
+                                }
+                                timer = setInterval(showRemaining, 1000);
+                            }
+                        </script>
+
+                        <div id="countdown-{{$countdown}}" class="countdown"></div>
+
+                        @php
+                            $countdown += 1;
+                        @endphp
+                        
                     </div>
+                    
                     <!-- Product actions-->
                     {{-- <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                             @auth
@@ -72,9 +118,9 @@
                         {{-- <div class="text-center"><a class="style-button" href="/detail-product/{{ $prod->product_id }}">Product Detail</a></div> --}}
                     {{-- </div> --}} 
                 </div>
-            </div>
+            </a>
             @endforeach
-    </div>
+        </div>
 
     </div>
 </section>

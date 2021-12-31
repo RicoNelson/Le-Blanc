@@ -40,26 +40,23 @@ class CartController extends Controller
     {
 
         if($request->session()){
-            if((int)$request->quantityInput > (int)$request->stock || (int)$request->quantityInput <= 0 || $request->quantityInput === null){
-                return back()->with('quantityError', 'Quantity Invalid!');
+            if((int)$request->bidInput < (int)$request->highest_bid){
+                return back()->with('bidError', 'Bid Price Invalid!');
             }
-
+            
             $user_id = $request->user_id;
             $product_id = $request->product_id;
-            $quantity = $request->quantityInput;
             
             if(Cart::where('product_id', $product_id)->where('user_id', $user_id)->first() !== null){
                 $cart = Cart::where('product_id', $product_id)->where('user_id', $user_id);
-                $cart->increment('quantity', $quantity);
             }else{
                 $cart = new Cart();
                 $cart->user_id = $user_id;
                 $cart->product_id = $product_id;
-                $cart->quantity = $quantity;
                 $cart->save();
             }
-
             return back()->with('addToCartSuccess', 'Add To Cart Success!');
+
         }
     }
 

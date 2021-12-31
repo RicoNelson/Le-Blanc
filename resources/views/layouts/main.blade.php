@@ -55,6 +55,7 @@
                         <ul class="dropdown-menu btn-outline-light" aria-labelledby="navbarDropdown">
                             @if (auth()->user()->role_id === 2)
                                 <li><a class="dropdown-item" href="/update-profile/{{ auth()->user()->user_id }}">Update Profile</a></li>
+                                <li><a class="dropdown-item" href="/active-bid">Active Bid</a></li>
                                 <li><a class="dropdown-item" href="/cart">Cart</a></li>
                                 <li><a class="dropdown-item" href="/transaction">Transaction History</a></li>
                             @endif
@@ -94,6 +95,7 @@
         <footer class="py-3 my-4">
             <ul class="nav justify-content-center border-bottom pb-3 mb-3">
                 <li class="nav-item"><a href="/" class="nav-link px-2 text-muted">Home</a></li>
+                <li class="nav-item"><a href="/products" class="nav-link px-2 text-muted">Products</a></li>
                 <li class="nav-item"><a href="/search" class="nav-link px-2 text-muted">Search Product</a></li>
                 <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Instagram</a></li>
                 <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Facebook</a></li>
