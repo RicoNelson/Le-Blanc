@@ -57,8 +57,9 @@ class ProductController extends Controller
             'datetimeInput' => 'required|date|after:tomorrow',
             'product_image' => 'image|file'
         ]);
-        
+
         $validated_data['datetimeInput'] = Carbon::parse($validated_data['datetimeInput'])->format('Y-m-d H:i:s');
+
         $validated_data['highest_bidder_id'] = 1;
 
         $validated_data['product_image'] = 'storage/' . $request->file('product_image')->store('images/product');

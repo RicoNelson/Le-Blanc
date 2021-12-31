@@ -56,10 +56,11 @@ Route::post('/manage-user/{id}', [ManageUserController::class, 'destroy'])->midd
 
 Route::get('/active-bid', [ActiveBidController::class, 'index'])->middleware('customer');
 
-Route::get('/cart', [CartController::class, 'show'])->middleware('customer');
-Route::post('/cart', [CartController::class, 'destroy'])->middleware('customer');
+// Route::get('/cart', [CartController::class, 'show'])->middleware('customer');
+// Route::post('/cart', [CartController::class, 'destroy'])->middleware('customer');
 
 Route::post('/detail-product/{id}', [ActiveBidController::class, 'store'])->middleware('customer');
+Route::post('/store-bid', [ActiveBidController::class, 'store_transaction'])->middleware('customer');
 
 Route::get('/transaction', [TransactionController::class, 'show'])->middleware('customer');
 Route::post('/transaction-create', [TransactionController::class, 'store'])->middleware('customer');

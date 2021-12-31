@@ -8,6 +8,9 @@
                 $countdown = 0;
             @endphp
             @foreach ($product as $prod)
+            @if ($prod->end_date < now())
+                @continue
+            @endif
             <a href="/detail-product/{{ $prod->product_id }}" class="col mb-5 no-text-decor">
                 <div class="card h-100">
                     <!-- Product image-->

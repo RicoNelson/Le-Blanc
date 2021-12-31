@@ -1,6 +1,16 @@
 @extends('layouts.main')
 
 @section('body')
+
+@if (session()->has('checkoutSuccess'))
+<div class="container d-flex justify-content-center mt-3">
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ session('checkoutSuccess') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+</div>
+@endif
+
     <div class="container mt-4">
         <h2>Active Bid: </h2>
 
@@ -13,12 +23,12 @@
                         <th scope="col">Bid Price</th>
                         <th scope="col">Auction Countdown</th>
                         <th scope="col">Status</th>
+                        <th scope="col">Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     @if ($active_bid->count() !== 0)
                         <?php
-                            $total = 0;
                             $countdown = 0;
                         ?>
                         @foreach ($active_bid as $ab)
@@ -58,17 +68,37 @@
                                     }
                                 </script>
 
-                                <td id="countdown-{{ $countdown }}"></td>
-
-                                @if ($ab->status_bid === 1)
-                                    <td>You have the potential to get this item</td>
+                                @if ($ab->products->end_date < $dt_now && $ab->products->highest_bidder_id === auth()->user()->user_id)
+                                    <td>Auction End</td>
+                                    @if ($ab->status_bid === 1)
+                                        <td>Congrats, you get the item, please make a payment</td>
+                                        <td>
+                                            <form action="/store-bid" method="POST">
+                                                @csrf
+                                                <input type="hidden" name="bid_id" value="{{ $ab->bid_id }}">
+                                                <button type="submit" class="btn btn-outline-dark">Pay</button>
+                                            </form>
+                                        </td>
+                                    @else
+                                        <td>Sorry you didn't get the produt, please try again next time.</td>
+                                        <td></td>
+                                    @endif
+                                @elseif($ab->products->end_date < $dt_now && $ab->products->highest_bidder_id !== auth()->user()->user_id)
+                                    <td>Auction End</td>
+                                    <td>Sorry you didn't get the produt, please try again next time.</td>
+                                    <td></td>
                                 @else
-                                    <td>Someone bid higher than you. Please make a new bid</td>
+                                    <td id="countdown-{{ $countdown }}"></td>
+                                    @if ($ab->status_bid === 1)
+                                        <td>You have the potential to get this item</td>
+                                    @else
+                                        <td>Someone bid higher than you. Please make a new bid</td>
+                                    @endif
                                 @endif
+                                
                             </tr>
 
                             <?php
-                                $total += $ab->products->price;
                                 $countdown += 1;
                             ?>
 
@@ -83,17 +113,6 @@
                     
                 </tbody>
             </table>
-            
-            {{-- @if ($active_bid>count() !== 0)
-                <div class="d-flex flex-column align-items-end">
-                    <p>Grand Total: Rp. {{ $total }},-</p>
-                    <form action="/transaction-create" method="post">
-                        @csrf
-                        <input type="hidden" name="id" value="{{ auth()->user()->user_id }}">
-                        <button class="btn btn-primary">Checkout</button>
-                    </form>
-                </div>
-            @endif --}}
         </div>
     </div>
 @endsection

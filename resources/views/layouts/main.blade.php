@@ -56,8 +56,8 @@
                             @if (auth()->user()->role_id === 2)
                                 <li><a class="dropdown-item" href="/update-profile/{{ auth()->user()->user_id }}">Update Profile</a></li>
                                 <li><a class="dropdown-item" href="/active-bid">Active Bid</a></li>
-                                <li><a class="dropdown-item" href="/cart">Cart</a></li>
-                                <li><a class="dropdown-item" href="/transaction">Transaction History</a></li>
+                                {{-- <li><a class="dropdown-item" href="/cart">Cart</a></li> --}}
+                                <li><a class="dropdown-item" href="/transaction">Bid History</a></li>
                             @endif
 
                             @if (auth()->user()->role_id === 1)

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\ActiveBid;
 use App\Models\Product;
+use App\Models\Transaction;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class ActiveBidController extends Controller
@@ -17,9 +19,12 @@ class ActiveBidController extends Controller
     {
         $active_bid = collect(ActiveBid::all())->where('user_id', auth()->user()->user_id);
         
+        $dt = Carbon::now();
+
         return view('active_bid.index', [
             'title'=> 'Le Blanc | Active Bid',
-            'active_bid' => $active_bid
+            'active_bid' => $active_bid,
+            'dt_now' => $dt
         ]);
     }
 
@@ -86,15 +91,28 @@ class ActiveBidController extends Controller
                 $product->highest_bid = $bid_price;
                 $product->save();
 
-            //     ->unsignedBigInteger('product_id');
-            // $table->unsignedBigInteger('user_id');
-            // $table->bigInteger('bid_price');
-            // $table->integer('status_bid');
             }
             
             return back()->with('addToCartSuccess', 'Bid Success!');
 
         }
+    }
+
+    public function store_transaction(Request $request){
+        $active_bid = ActiveBid::where('bid_id', $request->bid_id)->first();
+
+        $now = now()->toDate();
+        $transaction = new Transaction();
+        $transaction->user_id = auth()->user()->user_id;
+        $transaction->item_name = $active_bid->products->product_name;
+        $transaction->item_detail = $active_bid->products->product_description;
+        $transaction->price = $active_bid->bid_price;
+        $transaction->transaction_date = $now;
+        $transaction->save();
+
+        ActiveBid::where('bid_id', $request->bid_id)->first()->delete();
+        return back()->with('checkoutSuccess', 'Payment Success!');
+
     }
 
     /**
