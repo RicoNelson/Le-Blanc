@@ -15,3 +15,6 @@ Account for admin
 Account for customer
 - email: customer@customer.com
 - password: password
+
+- email: customer2@customer.com
+- password: password
