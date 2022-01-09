@@ -75,7 +75,7 @@
     </div>
 
     <div class="form-group row mb-3">
-        <label for="datetimeInput" class="col-sm-2 col-form-label">Starting Price: </label>
+        <label for="datetimeInput" class="col-sm-2 col-form-label">End Date: </label>
         <div class="col-sm-10">
             <input type="datetime-local" class="form-control" id="datetimeInput" @error('datetimeInput') is-invalid @enderror name="datetimeInput">
         </div>
