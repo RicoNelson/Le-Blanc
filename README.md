@@ -7,6 +7,9 @@ To open the web please do several steps:
 4. Run ```php artisan migrate:fresh --seed```
 5. Run ```php artisan serve```
 
+Video Link:
+```https://youtu.be/iuflGFCsQ58```
+
 Note:<br>
 Account for admin
 - email: admin@admin.com
