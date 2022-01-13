@@ -8,7 +8,7 @@ To open the web please do several steps:
 5. Run ```php artisan serve```
 
 Video Link:
-```https://youtu.be/iuflGFCsQ58```
+https://youtu.be/iuflGFCsQ58
 
 Note:<br>
 Account for admin
